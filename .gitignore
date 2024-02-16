@@ -1,2 +1,4 @@
 # unnecessary
 node_modules
+
+.env

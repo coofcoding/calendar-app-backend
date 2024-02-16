@@ -9,6 +9,9 @@ const app = express();
 // Public directory
 app.use( express.static('public') );
 
+// Lecture and body parse
+app.use( express.json() );
+
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 

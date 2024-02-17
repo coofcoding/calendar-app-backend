@@ -97,7 +97,7 @@ const userLogin = async (req, res = response) => {
             })
         }
 
-        // TODO: Generate JSON Web Token
+        // * Generate JSON Web Token
         const token = await JWTGenerator( user.id, user.name );
 
         ResponseDB({
@@ -125,11 +125,19 @@ const userLogin = async (req, res = response) => {
 
 }
 
-const reNewToken = (req, res = response) => {
+const reNewToken = async (req, res = response) => {
 
-    res.json({
-        ok: true,
-        msg: 'renew'
+    const { uid, name } = req;
+
+    const token = await JWTGenerator( uid, name );
+
+    ResponseDB({
+        res,
+        statusCode: 200,
+        jsonResponse: {
+            ok: true,
+            token
+        }
     })
 
 }

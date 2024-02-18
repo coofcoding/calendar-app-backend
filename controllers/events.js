@@ -1,5 +1,5 @@
 const { response } = require('express');
-const User = require('../models/Users');
+const Event = require('../models/Events');
 const ResponseDB = require('../middlewares/ResponseDB');
 const { JWTGenerator } = require('../helpers/jwt');
 
@@ -31,9 +31,13 @@ const getEvents = async (req, res = response) => {
 }
 const createEvent = async (req, res = response) => {
 
-    console.log( req.body );
+    const event = new Event( req.body );
 
     try {
+
+        event.user = req.uid;
+
+        await event.save();
 
         ResponseDB({
             res,

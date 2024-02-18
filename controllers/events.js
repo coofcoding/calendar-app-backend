@@ -47,7 +47,7 @@ const createEvent = async (req, res = response) => {
             statusCode: 200,
             jsonResponse: {
                 ok: true,
-                msg: 'createEvent',
+                msg: 'event created successfully.',
             }
         });
 
@@ -66,14 +66,48 @@ const createEvent = async (req, res = response) => {
 }
 const updateEvent = async (req, res = response) => {
 
+    const eventId = req.params.id;
+    const uid = req.uid;
+
     try {
+
+        const event = await Event.findById( eventId );
+
+        if ( !event ) {
+            ResponseDB({
+                res,
+                statusCode: 404,
+                jsonResponse: {
+                    ok: false,
+                    msg: 'this event does not exists',
+                }
+            });
+        }
+
+        if ( event.user.toString() !== uid ) {
+            return  ResponseDB({
+                res,
+                statusCode: 401,
+                jsonResponse:{
+                    ok:false,
+                    msg:'You are not the owner of this event'
+                }
+            })
+        }
+
+        const newEvent = {
+            ...req.body,
+            user: uid
+        }
+
+        await Event.findByIdAndUpdate( eventId, newEvent, { new: true } );
 
         ResponseDB({
             res,
             statusCode: 200,
             jsonResponse: {
                 ok: true,
-                msg: 'updateEvent',
+                msg: 'Event updated',
             }
         });
 
@@ -92,14 +126,43 @@ const updateEvent = async (req, res = response) => {
 }
 const deleteEvent = async (req, res = response) => {
 
+    const eventId = req.params.id;
+    const uid = req.uid;
+
     try {
+
+        const event = await Event.findById( eventId );
+
+        if ( !event ) {
+            ResponseDB({
+                res,
+                statusCode: 404,
+                jsonResponse: {
+                    ok: false,
+                    msg: 'this event does not exists',
+                }
+            });
+        }
+
+        if ( event.user.toString() !== uid ) {
+            return  ResponseDB({
+                res,
+                statusCode: 401,
+                jsonResponse:{
+                    ok:false,
+                    msg:'You are not the owner of this event'
+                }
+            })
+        }
+
+        await Event.findByIdAndDelete( eventId );
 
         ResponseDB({
             res,
             statusCode: 200,
             jsonResponse: {
                 ok: true,
-                msg: 'deleteEvent',
+                msg: 'event deleted successfully',
             }
         });
 

@@ -23,7 +23,12 @@ router.post('/', [
 ], createEvent);
 
 // TODO: Update event
-router.put('/:id', updateEvent);
+router.put('/:id',[
+    check('title', 'The titles is obligatory').not().isEmpty(),
+    check('start', 'The start date is obligatory').custom( isDate ),
+    check('end', 'The end date is obligatory').custom( isDate ),
+    validateFields
+], updateEvent);
 
 // TODO: Delete event
 router.delete('/:id', deleteEvent);

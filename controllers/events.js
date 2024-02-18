@@ -5,6 +5,9 @@ const { JWTGenerator } = require('../helpers/jwt');
 
 const getEvents = async (req, res = response) => {
 
+    const event = await Event.find()
+                             .populate('user', 'name')
+    
     try {
 
         ResponseDB({
@@ -12,7 +15,7 @@ const getEvents = async (req, res = response) => {
             statusCode: 200,
             jsonResponse: {
                 ok: true,
-                msg: 'getEvents',
+                msg: event,
             }
         });
 

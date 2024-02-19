@@ -10,7 +10,7 @@ const { createUser, userLogin, reNewToken } = require('../controllers/auth')
 const router = Router();
 
 router.post('/', [
-    check("email", "Invalid email or password please try again").isLength({ min: 6 }),
+    check("email", "Invalid email or password please try again").isEmail(),
     check("password", "Invalid email or password please try again").isLength({ min: 6 }),
     validateFields
 ],userLogin)

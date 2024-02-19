@@ -18,7 +18,7 @@ const createUser = async (req, res = response) => {
                 statusCode: 400,
                 jsonResponse: {
                     ok: false,
-                    msg: 'This user already exist, please login or click the "do you forget your password?" link'
+                    msg: 'This email already exists, please login or create a new account'
                 }
             })
         }

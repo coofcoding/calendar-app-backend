@@ -136,6 +136,8 @@ const reNewToken = async (req, res = response) => {
         statusCode: 200,
         jsonResponse: {
             ok: true,
+            uid,
+            name,
             token
         }
     })

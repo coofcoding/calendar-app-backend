@@ -1,3 +1,93 @@
-html, body {
-    background-color: violet;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+html {
+    background-color: #322b3e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(50%);
+    animation: icon-transform 1s forwards ease-in-out 1s;
+}
+
+effect {
+    position: absolute;
+    width: 10rem;
+    z-index: -1;
+    height: 10rem;
+    background-color: #ffc738;
+    filter: blur(200px);
+}
+
+section {
+    opacity: 0;
+    text-align: center;
+    text-wrap: wrap;
+    background-color: #ffffff06;
+    padding: 2rem 5rem;
+    border-radius: 0.5rem;
+    border: 0.1em solid #ffffff18;
+    animation: box-content 1s forwards 2s ease-in-out;
+}
+
+h1 {
+    color: #fff;
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    color: #ffffff74;
+    font-weight: 600;
+    font-size: 1.2em;
+    max-width: 40ch;
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+@keyframes box-content {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes icon-transform {
+    to {
+        transform: translateY(0%);
+    }
+}
+
+@media ( width < 600px ) {
+    p {
+        font-size: 0.9em;
+    }
+}
+
+@media ( width < 485px ) {
+    section {
+        padding: 2rem 20px;
+    }
 }

@@ -15,7 +15,7 @@ const getEvents = async (req, res = response) => {
             statusCode: 200,
             jsonResponse: {
                 ok: true,
-                msg: event,
+                events: event,
             }
         });
 
@@ -48,6 +48,7 @@ const createEvent = async (req, res = response) => {
             jsonResponse: {
                 ok: true,
                 msg: 'event created successfully.',
+                event
             }
         });
 
